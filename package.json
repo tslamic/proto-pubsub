@@ -1,0 +1,23 @@
+{
+  "name": "proto-pubsub",
+  "version": "0.0.1",
+  "description": "Use GCP's PubSub with Protocol Buffers",
+  "homepage": "https://github.com/tslamic/proto-pubsub/blob/master/README.md",
+  "bugs": "https://github.com/tslamic/proto-pubsub/issues",
+  "main": "index.js",
+  "scripts": {
+    "lint": "tslint --project tsconfig.json",
+    "build": "tsc"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+    "proto",
+    "pubsub",
+    "gcp",
+    "protobuf"
+  ],
+  "author": "Tadej Slamic (http://www.tadej.me)",
+  "repository": "github:tslamic/proto-pubsub",
+  "license": "ISC"
+}
