@@ -38,6 +38,12 @@
   "license": "ISC",
   "name": "proto-pubsub",
   "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
     "extension": [
       ".ts"
     ],
@@ -46,8 +52,7 @@
     ],
     "instrument": true,
     "reporter": [
-      "html",
-      "text-summary"
+      "html"
     ],
     "require": [
       "ts-node/register"
@@ -57,7 +62,7 @@
   "repository": "github:tslamic/proto-pubsub",
   "scripts": {
     "build": "tsc",
-    "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "tslint --project tsconfig.json",
     "test": "nyc node_modules/mocha/bin/mocha --require ts-node/register test/**/*.ts"
   },
