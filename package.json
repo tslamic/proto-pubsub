@@ -24,6 +24,9 @@
     "tslint": "~5.8.0",
     "typescript": "~2.8.3"
   },
+  "files": [
+    "lib"
+  ],
   "homepage": "https://github.com/tslamic/proto-pubsub/blob/master/README.md",
   "keywords": [
     "cloud",
