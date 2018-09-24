@@ -57,7 +57,7 @@
   "repository": "github:tslamic/proto-pubsub",
   "scripts": {
     "build": "tsc",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "tslint --project tsconfig.json",
     "test": "nyc node_modules/mocha/bin/mocha --require ts-node/register test/**/*.ts"
   },
