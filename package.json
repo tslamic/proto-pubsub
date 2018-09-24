@@ -1,23 +1,62 @@
 {
-  "name": "proto-pubsub",
-  "version": "0.0.1",
-  "description": "Use GCP's PubSub with Protocol Buffers",
-  "homepage": "https://github.com/tslamic/proto-pubsub/blob/master/README.md",
-  "bugs": "https://github.com/tslamic/proto-pubsub/issues",
-  "main": "index.js",
-  "scripts": {
-    "lint": "tslint --project tsconfig.json",
-    "build": "tsc"
-  },
-  "dependencies": {},
-  "devDependencies": {},
-  "keywords": [
-    "proto",
-    "pubsub",
-    "gcp",
-    "protobuf"
-  ],
   "author": "Tadej Slamic (http://www.tadej.me)",
+  "bugs": "https://github.com/tslamic/proto-pubsub/issues",
+  "dependencies": {
+    "@google-cloud/pubsub": "^0.20.0",
+    "google-protobuf": "^3.6.1"
+  },
+  "description": "Use GCP's PubSub with Protocol Buffers",
+  "devDependencies": {
+    "@types/chai": "^4.1.5",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/google-cloud__pubsub": "^0.18.1",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.10.3",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
+    "sinon": "^6.3.4",
+    "source-map-support": "^0.5.9",
+    "ts-node": "^7.0.1",
+    "tslint": "~5.8.0",
+    "typescript": "~2.8.3"
+  },
+  "homepage": "https://github.com/tslamic/proto-pubsub/blob/master/README.md",
+  "keywords": [
+    "cloud",
+    "gcp",
+    "google cloud platform",
+    "google cloud",
+    "google pubsub",
+    "proto",
+    "protobuf",
+    "pubsub"
+  ],
+  "license": "ISC",
+  "name": "proto-pubsub",
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "instrument": true,
+    "reporter": [
+      "html",
+      "text-summary"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "sourceMap": true
+  },
   "repository": "github:tslamic/proto-pubsub",
-  "license": "ISC"
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint --project tsconfig.json",
+    "test": "nyc node_modules/mocha/bin/mocha --require ts-node/register test/**/*.ts"
+  },
+  "version": "0.0.1"
 }
