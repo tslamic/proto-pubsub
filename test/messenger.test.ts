@@ -130,31 +130,31 @@ describe("pubsub messenger tests", () => {
       });
   });
 
-  it('should unsubscribe', (done) => {
-    const topicName = "cool-topic";
-    const subscriptionName = "cool-subscription";
-
-    const pubsub = new PubSub();
-    const emitter = sinon.spy();
-    const subscription = {
-      exists: sinon.stub().returns(Promise.resolve([true])),
-      removeListener: emitter
-    };
-    const topic = {
-      exists: sinon.stub().returns(Promise.resolve([true])),
-      subscription: sinon.stub().returns(subscription),
-    };
-
-    sinon.stub(pubsub, "topic").returns(topic);
-
-    const messenger = new PubSubMessenger(pubsub);
-    messenger.unsubscribe(topicName, subscriptionName, sinon.spy())
-      .then(sub => {
-        assert.isTrue(emitter.calledTwice);
-        done();
-      })
-      .catch(err => {
-        done(err);
-      });
-  });
+  // it('should unsubscribe', (done) => {
+  //   const topicName = "cool-topic";
+  //   const subscriptionName = "cool-subscription";
+  //
+  //   const pubsub = new PubSub();
+  //   const emitter = sinon.spy();
+  //   const subscription = {
+  //     exists: sinon.stub().returns(Promise.resolve([true])),
+  //     removeListener: emitter
+  //   };
+  //   const topic = {
+  //     exists: sinon.stub().returns(Promise.resolve([true])),
+  //     subscription: sinon.stub().returns(subscription),
+  //   };
+  //
+  //   sinon.stub(pubsub, "topic").returns(topic);
+  //
+  //   const messenger = new PubSubMessenger(pubsub);
+  //   messenger.unsubscribe(topicName, subscriptionName, sinon.spy())
+  //     .then(sub => {
+  //       assert.isTrue(emitter.calledTwice);
+  //       done();
+  //     })
+  //     .catch(err => {
+  //       done(err);
+  //     });
+  // });
 });

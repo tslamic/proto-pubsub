@@ -1,8 +1,17 @@
 import {Publisher, PubSub, Subscription, Topic} from "@google-cloud/pubsub";
 
-export type Listener = {
-  onReceived: (message) => void,
-  onError: (err) => void
+export interface SubscriptionListener {
+  /**
+   * Invoked when a new message is received.
+   * @param message the PubsubMessage object.
+   */
+  onReceived(message): void,
+
+  /**
+   * Invoked on erroneous behaviour.
+   * @param err the error.
+   */
+  onError(err): void
 }
 
 export interface Messenger {
@@ -15,17 +24,11 @@ export interface Messenger {
 
   /**
    * Subscribes to a topic and listens for incoming messages.
+   * To unsubscribe, call close() on the received Subscription instance.
    */
   subscribe(topicName: string,
             subscriptionName: string,
-            listener: Listener): Promise<Subscription>;
-
-  /**
-   * Unsubscribes from a topic.
-   */
-  unsubscribe(topicName: string,
-              subscriptionName: string,
-              listener: Listener): Promise<Subscription>;
+            listener: SubscriptionListener): Promise<Subscription>;
 }
 
 export class PubSubMessenger implements Messenger {
@@ -38,7 +41,7 @@ export class PubSubMessenger implements Messenger {
   publish(topicName: string,
           data: Buffer,
           attributes?: Publisher.Attributes): Promise<string> {
-    return this.ensureTopicExists(topicName)
+    return this.checkTopic(topicName)
       .then(topic => {
         return topic
           .publisher()
@@ -48,7 +51,7 @@ export class PubSubMessenger implements Messenger {
 
   subscribe(topicName: string,
             subscriptionName: string,
-            listener: Listener): Promise<Subscription> {
+            listener: SubscriptionListener): Promise<Subscription> {
     return this.getOrCreateSubscription(topicName, subscriptionName)
       .then(subscription => {
         subscription.on('message', listener.onReceived);
@@ -57,21 +60,9 @@ export class PubSubMessenger implements Messenger {
       });
   }
 
-  unsubscribe(topicName: string,
-              subscriptionName: string,
-              listener: Listener): Promise<Subscription> {
-    return this.ensureTopicExists(topicName)
-      .then(topic => {
-        const subscription = topic.subscription(subscriptionName);
-        subscription.removeListener('message', listener.onReceived);
-        subscription.removeListener('error', listener.onError);
-        return subscription;
-      });
-  }
-
   // See the following comment for more details:
   // https://github.com/googleapis/google-cloud-node/issues/696#issuecomment-116835719
-  private ensureTopicExists(topicName: string): Promise<Topic> {
+  private checkTopic(topicName: string): Promise<Topic> {
     const topic = this.pubsub.topic(topicName);
     return topic.exists()
       .then(response => {
@@ -86,7 +77,7 @@ export class PubSubMessenger implements Messenger {
 
   private getOrCreateSubscription(topicName: string,
                                   subscriptionName: string): Promise<Subscription> {
-    return this.ensureTopicExists(topicName)
+    return this.checkTopic(topicName)
       .then(topic => {
         const subscription = topic.subscription(subscriptionName);
         return subscription.exists()
