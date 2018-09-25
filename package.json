@@ -1,6 +1,6 @@
 {
   "author": "Tadej Slamic (http://www.tadej.me)",
-  "bugs": "https://github.com/tslamic/proto-pubsub/issues",
+  "bugs": "https://github.com/tslamic/simple-pubsub/issues",
   "dependencies": {
     "@google-cloud/pubsub": "^0.20.0",
     "google-protobuf": "^3.6.1"
@@ -27,7 +27,7 @@
   "files": [
     "lib"
   ],
-  "homepage": "https://github.com/tslamic/proto-pubsub/blob/master/README.md",
+  "homepage": "https://github.com/tslamic/simple-pubsub/blob/master/README.md",
   "keywords": [
     "cloud",
     "gcp",
@@ -39,7 +39,7 @@
     "pubsub"
   ],
   "license": "ISC",
-  "name": "proto-pubsub",
+  "name": "simple-pubsub",
   "nyc": {
     "check-coverage": true,
     "per-file": true,
@@ -62,7 +62,7 @@
     ],
     "sourceMap": true
   },
-  "repository": "github:tslamic/proto-pubsub",
+  "repository": "github:tslamic/simple-pubsub",
   "scripts": {
     "build": "tsc",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
