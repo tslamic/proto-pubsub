@@ -67,7 +67,7 @@
     "build": "tsc",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "tslint --project tsconfig.json",
-    "test": "nyc node_modules/mocha/bin/mocha --require ts-node/register test/**/*.ts"
+    "test": "nyc node_modules/mocha/bin/mocha --require ts-node/register **/*.test.ts"
   },
   "version": "0.0.1"
 }
